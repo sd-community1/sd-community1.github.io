@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الترويج الخاصة بخادمك</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ============================== */
+        /* التصميم الجمالي (CSS) */
+        /* ============================== */
+        
+        /* تنسيقات الجسم والخلفية */
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl; 
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* خلفية متدرجة داكنة أنيقة */
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
+            color: #f8fafc; /* لون النص فاتح */
+            line-height: 1.6;
+        }
+
+        /* حاوية المحتوى الرئيسية */
+        .promo-container {
+            background-color: rgba(30, 41, 59, 0.9); /* خلفية شبه شفافة معتمة */
+            padding: 45px 65px;
+            border-radius: 20px;
+            /* ظل ثلاثي الأبعاد لجعل الحاوية بارزة */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); 
+            max-width: 550px;
+            width: 90%;
+            border: 1px solid rgba(71, 85, 105, 0.5); /* إطار خفيف */
+        }
+
+        /* تنسيق العنوان */
+        h1 {
+            font-weight: 700; /* وزن الخط السميك */
+            font-size: 2.3em;
+            margin-bottom: 0.5em;
+            color: #93c5fd; /* لون أزرق فاتح جذاب */
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 2.5em;
+            color: #cbd5e1;
+        }
+
+        /* مجموعة الأزرار */
+        .buttons-group {
+            display: flex;
+            flex-direction: column; 
+            gap: 18px; 
+        }
+
+        /* تنسيق الأزرار العامة */
+        .promo-button {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 30px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.15em;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* تأثير حركي احترافي */
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* الأيقونة داخل الزر */
+        .promo-button i {
+            margin-left: 10px; 
+            font-size: 1.25em;
+        }
+
+        /* زر "موقعي" */
+        .website-button {
+            background-color: #0d9488; /* تركواز داكن */
+            color: white;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+        }
+
+        .website-button:hover {
+            background-color: #0f766e;
+            transform: translateY(-4px); /* تأثير رفع لطيف */
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.5);
+        }
+
+        /* زر "سيرفري الدسكورد" */
+        .discord-button {
+            background-color: #5865f2; /* لون الديسكورد البنفسجي */
+            color: white;
+            box-shadow: 0 4px 10px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-button:hover {
+            background-color: #4e5ac8;
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.5);
+        }
+
+        /* تنسيق للأجهزة الصغيرة */
+        @media (max-width: 600px) {
+            .promo-container {
+                padding: 30px 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .promo-button {
+                font-size: 1.1em;
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="promo-container">
+        <h1>مرحباً بك! انضم إلى مجتمعنا</h1>
+        <p>اكتشف آخر مشاريعي وتواصل معي ومع أعضاء المجتمع عبر سيرفر الديسكورد.</p>
+        
+        <div class="buttons-group">
+            
+            <a href="https://bbggjah-commits.github.io" target="_blank" class="promo-button website-button">
+                <i class="fas fa-globe"></i> 
+                موقعي
+            </a>
+            
+            <a href="https://discord.gg/8h8xtAe6YT" class="promo-button discord-button">
+                <i class="fab fa-discord"></i> 
+                سيرفري الديسكورد
+            </a>
+        </div>
+    </div>
+</body>
+</html>
