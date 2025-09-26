@@ -13,9 +13,15 @@
 
     <style>
         /* ============================== */
-        /* التصميم الجمالي (CSS) */
+        /* التصميم الجمالي (CSS) - الألوان: أسود وأبيض */
         /* ============================== */
         
+        /* الخطوط والحركة الرئيسية */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* تنسيقات الجسم والخلفية */
         body {
             font-family: 'Cairo', sans-serif;
@@ -27,37 +33,60 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* خلفية متدرجة داكنة أنيقة */
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
-            color: #f8fafc; /* لون النص فاتح */
+            color: #333; /* لون نص داكن للتباين */
             line-height: 1.6;
+            
+            /* تطبيق خلفية الصورة */
+            background-image: url('https://cdn.discordapp.com/attachments/1410679561842327592/1421119552493977630/1758870374324.1758870326000.jpg?ex=68d7e038&is=68d68eb8&hm=b637956d47f09b8eaf31ff44daa62df082772262a0e8e8fdcb5b7a3ed8a0a364&');
+            background-size: cover; /* تغطية كاملة */
+            background-position: center; 
+            background-attachment: fixed; /* تثبيت الخلفية */
+        }
+        
+        /* شريط الترويسة الثابت */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* خلفية سوداء شبه شفافة */
+            color: white;
+            padding: 15px 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            z-index: 1000; /* للتأكد من ظهوره فوق العناصر الأخرى */
+            letter-spacing: 2px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         /* حاوية المحتوى الرئيسية */
         .promo-container {
-            background-color: rgba(30, 41, 59, 0.9); /* خلفية شبه شفافة معتمة */
+            background-color: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة */
             padding: 45px 65px;
             border-radius: 20px;
-            /* ظل ثلاثي الأبعاد لجعل الحاوية بارزة */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
             max-width: 550px;
             width: 90%;
-            border: 1px solid rgba(71, 85, 105, 0.5); /* إطار خفيف */
+            border: 1px solid #ccc; /* إطار خفيف */
+            
+            /* تطبيق تأثير الظهور */
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0; /* يبدأ مخفيًا */
+            margin-top: 80px; /* لترك مساحة للشريط العلوي */
         }
 
         /* تنسيق العنوان */
         h1 {
-            font-weight: 700; /* وزن الخط السميك */
+            font-weight: 700; 
             font-size: 2.3em;
             margin-bottom: 0.5em;
-            color: #93c5fd; /* لون أزرق فاتح جذاب */
+            color: #000; /* لون العنوان أسود */
             letter-spacing: 1px;
         }
 
         p {
             font-size: 1.1em;
             margin-bottom: 2.5em;
-            color: #cbd5e1;
+            color: #555; /* لون نص رمادي داكن */
         }
 
         /* مجموعة الأزرار */
@@ -78,11 +107,17 @@
             text-decoration: none;
             border-radius: 12px;
             font-size: 1.15em;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* تأثير حركي احترافي */
-            border: none;
+            transition: all 0.2s ease-in-out; 
+            border: 2px solid; /* إضافة إطار للوضوح */
             cursor: pointer;
             width: 100%;
             box-sizing: border-box;
+            
+            /* تأثير الضغط (Active State) */
+            &:active {
+                transform: scale(0.98); /* تصغير عند الضغط */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            }
         }
 
         /* الأيقونة داخل الزر */
@@ -91,30 +126,33 @@
             font-size: 1.25em;
         }
 
-        /* زر "موقعي" */
+        /* زر "موقعي" - تصميم أبيض على أسود */
         .website-button {
-            background-color: #0d9488; /* تركواز داكن */
+            background-color: #000; /* أسود */
             color: white;
-            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+            border-color: #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .website-button:hover {
-            background-color: #0f766e;
-            transform: translateY(-4px); /* تأثير رفع لطيف */
-            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.5);
+            background-color: #333; /* رمادي داكن عند التحويم */
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* زر "سيرفري الدسكورد" */
+        /* زر "سيرفري الدسكورد" - تصميم أسود على أبيض (مقلوب) */
         .discord-button {
-            background-color: #5865f2; /* لون الديسكورد البنفسجي */
-            color: white;
-            box-shadow: 0 4px 10px rgba(88, 101, 242, 0.3);
+            background-color: #fff; /* أبيض */
+            color: #000;
+            border-color: #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .discord-button:hover {
-            background-color: #4e5ac8;
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.5);
+            background-color: #eee; /* رمادي فاتح عند التحويم */
+            color: #000;
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* تنسيق للأجهزة الصغيرة */
@@ -136,6 +174,11 @@
     </style>
 </head>
 <body>
+    
+    <div class="sticky-header">
+        NOV.COM
+    </div>
+    
     <div class="promo-container">
         <h1>مرحباً بك! انضم إلى مجتمعنا</h1>
         <p>اكتشف آخر مشاريعي وتواصل معي ومع أعضاء المجتمع عبر سيرفر الديسكورد.</p>
@@ -147,7 +190,7 @@
                 موقعي
             </a>
             
-            <a href="https://discord.gg/8h8xtAe6YT" class="promo-button discord-button">
+            <a href="https://discord.gg/8h8xtAe6YT" target="_blank" class="promo-button discord-button">
                 <i class="fab fa-discord"></i> 
                 سيرفري الديسكورد
             </a>
