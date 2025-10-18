@@ -3,198 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة الترويج الخاصة بخادمك</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <title>إحصائيات أهم المواقع العالمية</title>
     <style>
-        /* ============================== */
-        /* التصميم الجمالي (CSS) - الألوان: أسود وأبيض */
-        /* ============================== */
-        
-        /* الخطوط والحركة الرئيسية */
-        @keyframes fadeIn {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .google { background: linear-gradient(135deg, #4285f4, #34a853); }
+        .youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .facebook { background: linear-gradient(135deg, #1877f2, #0d65d9); }
+
+        .card-title {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .stats {
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .counter {
+            display: inline-block;
+        }
+
+        .rank {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .card {
+            position: relative;
+        }
+
+        @keyframes countUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* تنسيقات الجسم والخلفية */
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl; 
+        .stat-value {
+            animation: countUp 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .cards-container { grid-template-columns: 1fr; }
+        }
+
+        footer {
             text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333; /* لون نص داكن للتباين */
-            line-height: 1.6;
-            
-            /* تطبيق خلفية الصورة */
-            background-image: url('https://cdn.discordapp.com/attachments/1410679561842327592/1421119552493977630/1758870374324.1758870326000.jpg?ex=68d7e038&is=68d68eb8&hm=b637956d47f09b8eaf31ff44daa62df082772262a0e8e8fdcb5b7a3ed8a0a364&');
-            background-size: cover; /* تغطية كاملة */
-            background-position: center; 
-            background-attachment: fixed; /* تثبيت الخلفية */
-        }
-        
-        /* شريط الترويسة الثابت */
-        .sticky-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* خلفية سوداء شبه شفافة */
             color: white;
-            padding: 15px 0;
-            font-size: 1.2em;
-            font-weight: 700;
-            z-index: 1000; /* للتأكد من ظهوره فوق العناصر الأخرى */
-            letter-spacing: 2px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* حاوية المحتوى الرئيسية */
-        .promo-container {
-            background-color: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة */
-            padding: 45px 65px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
-            max-width: 550px;
-            width: 90%;
-            border: 1px solid #ccc; /* إطار خفيف */
-            
-            /* تطبيق تأثير الظهور */
-            animation: fadeIn 1s ease-out forwards;
-            opacity: 0; /* يبدأ مخفيًا */
-            margin-top: 80px; /* لترك مساحة للشريط العلوي */
-        }
-
-        /* تنسيق العنوان */
-        h1 {
-            font-weight: 700; 
-            font-size: 2.3em;
-            margin-bottom: 0.5em;
-            color: #000; /* لون العنوان أسود */
-            letter-spacing: 1px;
-        }
-
-        p {
-            font-size: 1.1em;
-            margin-bottom: 2.5em;
-            color: #555; /* لون نص رمادي داكن */
-        }
-
-        /* مجموعة الأزرار */
-        .buttons-group {
-            display: flex;
-            flex-direction: column; 
-            gap: 18px; 
-        }
-
-        /* تنسيق الأزرار العامة */
-        .promo-button {
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 30px;
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 1.15em;
-            transition: all 0.2s ease-in-out; 
-            border: 2px solid; /* إضافة إطار للوضوح */
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
-            
-            /* تأثير الضغط (Active State) */
-            &:active {
-                transform: scale(0.98); /* تصغير عند الضغط */
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        /* الأيقونة داخل الزر */
-        .promo-button i {
-            margin-left: 10px; 
-            font-size: 1.25em;
-        }
-
-        /* زر "موقعي" - تصميم أبيض على أسود */
-        .website-button {
-            background-color: #000; /* أسود */
-            color: white;
-            border-color: #000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .website-button:hover {
-            background-color: #333; /* رمادي داكن عند التحويم */
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* زر "سيرفري الدسكورد" - تصميم أسود على أبيض (مقلوب) */
-        .discord-button {
-            background-color: #fff; /* أبيض */
-            color: #000;
-            border-color: #000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .discord-button:hover {
-            background-color: #eee; /* رمادي فاتح عند التحويم */
-            color: #000;
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* تنسيق للأجهزة الصغيرة */
-        @media (max-width: 600px) {
-            .promo-container {
-                padding: 30px 25px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            p {
-                font-size: 1em;
-            }
-            .promo-button {
-                font-size: 1.1em;
-                padding: 14px 20px;
-            }
+            margin-top: 50px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    
-    <div class="sticky-header">
-        NOV.COM
-    </div>
-    
-    <div class="promo-container">
-        <h1>مرحباً بك! انضم إلى مجتمعنا</h1>
-        <p>اكتشف آخر مشاريعي وتواصل معي ومع أعضاء المجتمع عبر سيرفر الديسكورد.</p>
-        
-        <div class="buttons-group">
-            
-            <a href="https://bbggjah-commits.github.io" target="_blank" class="promo-button website-button">
-                <i class="fas fa-globe"></i> 
-                موقعي
-            </a>
-            
-            <a href="https://discord.gg/8h8xtAe6YT" target="_blank" class="promo-button discord-button">
-                <i class="fab fa-discord"></i> 
-                سيرفري الديسكورد
-            </a>
+    <div class="container">
+        <header>
+            <h1>📊 إحصائيات المواقع العالمية</h1>
+            <p class="subtitle">أهم 3 مواقع في العالم حسب عدد الزوار</p>
+        </header>
+
+        <div class="cards-container">
+            <!-- Google Card -->
+            <div class="card">
+                <div class="rank">1</div>
+                <div class="card-header">
+                    <div class="icon google">🔍</div>
+                    <h2 class="card-title">Google</h2>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار الشهريون</div>
+                        <div class="stat-value">89.3 مليار</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار اليوميون</div>
+                        <div class="stat-value">2.98 مليار</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">متوسط مدة الزيارة</div>
+                        <div class="stat-value">10:37 دقيقة</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube Card -->
+            <div class="card">
+                <div class="rank">2</div>
+                <div class="card-header">
+                    <div class="icon youtube">▶️</div>
+                    <h2 class="card-title">YouTube</h2>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار الشهريون</div>
+                        <div class="stat-value">74.8 مليار</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار اليوميون</div>
+                        <div class="stat-value">2.49 مليار</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">متوسط مدة الزيارة</div>
+                        <div class="stat-value">19:24 دقيقة</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facebook Card -->
+            <div class="card">
+                <div class="rank">3</div>
+                <div class="card-header">
+                    <div class="icon facebook">👥</div>
+                    <h2 class="card-title">Facebook</h2>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار الشهريون</div>
+                        <div class="stat-value">17.2 مليار</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">الزوار اليوميون</div>
+                        <div class="stat-value">573 مليون</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">متوسط مدة الزيارة</div>
+                        <div class="stat-value">10:52 دقيقة</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <footer>
+            <p>📅 آخر تحديث: 2024 | البيانات تقريبية</p>
+        </footer>
     </div>
+
+    <script>
+        // إضافة تأثير حركي عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // تأثير النقر على البطاقة
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
