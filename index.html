@@ -3,157 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أسئلتك العشر</title>
+    <title>منصة الدردشة الذكية الشاملة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Cormorant Garamond', serif;
-            text-align: center;
-            padding: 50px 20px;
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-            font-weight: 300;
-            animation: fadeInUp 1s ease;
-        }
-
-        .question-container {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            padding: 30px;
-            border: 1px solid #444;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(255,255,255,0.05) inset;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .question-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(255,255,255,0.1) inset;
-        }
-
-        .question {
-            font-size: 1.4rem;
-            margin: 25px 0;
-            padding: 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            text-align: right;
-        }
-
-        .question:hover {
-            background: rgba(255,255,255,0.08);
-            transform: scale(1.02);
-        }
-
-        .question::before {
-            content: "❓";
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            opacity: 0.7;
-        }
-
-        .start-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-top: 40px;
-            transition: all 0.4s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .start-btn:hover {
-            background: #eee;
-            transform: scale(1.05);
-            letter-spacing: 2px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        footer {
-            margin-top: 80px;
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .question { font-size: 1.2rem; }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .message-user { background-color: #2563eb; color: white; border-radius: 12px 12px 0 12px; }
+        .message-ai { background-color: #374151; color: white; border-radius: 12px 12px 12px 0; }
+        .typing-dot { animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100 h-screen flex flex-col md:flex-row overflow-hidden">
 
-    <h1>🖤 أسئلتك العشر 🤍</h1>
+    <!-- القائمة الجانبية للإعدادات -->
+    <aside class="w-full md:w-1/4 bg-gray-800 p-4 border-l border-gray-700 flex flex-col overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-6 text-blue-400">🤖 مركز الذكاء</h1>
+        
+        <!-- اختيار الموديل -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium mb-2 text-gray-300">اختر المزود:</label>
+            <select id="provider-select" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:outline-none focus:border-blue-500" onchange="toggleSettings()">
+                <option value="default">الذكاء الاصطناعي المجاني (الجاهز)</option>
+                <option value="custom">استخدام API خاص (OpenAI/Groq/..)</option>
+            </select>
+        </div>
 
-    <div class="question-container">
-        <div class="question">ما الشيء الذي يجعلك تستيقظ بسعادة كل صباح؟</div>
-        <div class="question">إذا كان بإمكانك العيش في أي زمن، فأين ستختار؟</div>
-        <div class="question">ما آخر شيء جعلك تبكي من الفرح؟</div>
-        <div class="question">ما الكلمة التي تصفك أكثر من غيرها؟</div>
-        <div class="question">إذا كان لديك يوم واحد فقط لتغيير العالم، ماذا ستفعل؟</div>
-        <div class="question">ما أكثر ذكرى طفولية تحب أن تعود إليها؟</div>
-        <div class="question">ما الشيء الذي تخفيه عن الجميع تقريباً؟</div>
-        <div class="question">إذا كتبت كتاباً عن حياتك، ما سيكون عنوانه؟</div>
-        <div class="question">ما أكثر شيء تفتخر به في نفسك؟</div>
-        <div class="question">لو كان بإمكانك إرسال رسالة لنفسك قبل 5 سنوات، ماذا ستقول؟</div>
-    </div>
+        <!-- إعدادات الـ API الخاص (مخفية افتراضياً) -->
+        <div id="custom-settings" class="hidden space-y-4 border-t border-gray-700 pt-4">
+            <div>
+                <label class="text-xs text-gray-400">رابط الـ API (Base URL):</label>
+                <input type="text" id="api-url" placeholder="https://api.openai.com/v1" class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-sm text-ltr" dir="ltr">
+            </div>
+            <div>
+                <label class="text-xs text-gray-400">مفتاح API (Key):</label>
+                <input type="password" id="api-key" placeholder="sk-..." class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-sm text-ltr" dir="ltr">
+            </div>
+            <div>
+                <label class="text-xs text-gray-400">اسم الموديل (Model Name):</label>
+                <input type="text" id="model-name" placeholder="gpt-3.5-turbo" class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-sm text-ltr" dir="ltr">
+            </div>
+            <button onclick="saveSettings()" class="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded text-sm transition">حفظ الإعدادات</button>
+        </div>
 
-    <button class="start-btn">✨ ابدأ الرحلة ✨</button>
+        <div class="mt-auto text-xs text-gray-500 text-center">
+            <p>يتم الاتصال مباشرة من متصفحك إلى الخادم.</p>
+        </div>
+    </aside>
 
-    <footer>
-        &copy; 2025 — أسئلتك العشر | موقع أسود وأبيض بأناقة لا تُضاهى
-    </footer>
+    <!-- منطقة الدردشة -->
+    <main class="flex-1 flex flex-col bg-gray-900 relative">
+        <!-- سجل المحادثة -->
+        <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="message-ai p-4 max-w-2xl self-start">
+                مرحباً! أنا جاهز للتحدث معك. يمكنك التحدث معي مباشرة أو إعداد مفتاح API الخاص بك من القائمة الجانبية.
+            </div>
+        </div>
+
+        <!-- مؤشر الكتابة -->
+        <div id="loading" class="hidden px-6 py-2">
+            <span class="text-gray-400 text-sm flex gap-1">
+                الذكاء الاصطناعي يكتب <span class="typing-dot">.</span><span class="typing-dot" style="animation-delay:0.2s">.</span><span class="typing-dot" style="animation-delay:0.4s">.</span>
+            </span>
+        </div>
+
+        <!-- حقل الإدخال -->
+        <div class="p-4 bg-gray-800 border-t border-gray-700">
+            <form id="chat-form" class="flex gap-2 max-w-4xl mx-auto" onsubmit="sendMessage(event)">
+                <input type="text" id="user-input" class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="اكتب رسالتك هنا..." autocomplete="off">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition font-medium">
+                    إرسال ➤
+                </button>
+            </form>
+        </div>
+    </main>
 
     <script>
-        document.querySelectorAll('.question').forEach(q => {
-            q.addEventListener('click', function() {
-                this.style.backgroundColor = 'rgba(255,255,255,0.1)';
-                this.innerHTML += ' <span style="color:#aaa; font-size:0.9em;">✓</span>';
-                this.style.pointerEvents = 'none';
-                // يمكنك إضافة صوت أو تأثير آخر هنا
-            });
-        });
+        // === إعدادات الموديل الجاهز (Default AI) ===
+        // ملاحظة: لأغراض الأمان في المواقع الحقيقية، يجب ألا تضع مفتاحك هنا، بل تستدعيه من Backend
+        // لكن ليعمل الكود الآن، سنستخدم مفتاح تجريبي لخدمة Groq (سريع ومجاني) أو يمكنك وضع مفتاحك هنا
+        const DEFAULT_CONFIG = {
+            url: "https://api.groq.com/openai/v1", // رابط متوافق مع OpenAI
+            model: "llama3-8b-8192", // موديل مجاني وسريع جداً
+            // تنبيه: ضع مفتاح Groq الخاص بك هنا ليعمل "الذكاء الجاهز"
+            // احصل عليه مجاناً من: console.groq.com
+            apiKey: "" 
+        };
 
-        document.querySelector('.start-btn').addEventListener('click', function() {
-            alert('✨ حان وقت التأمل والإجابة الصادقة... استمتع برحلتك الداخلية!');
-        });
+        let chatHistory = [
+            { role: "system", content: "أنت مساعد ذكي ومفيد تتحدث العربية بطلاقة." }
+        ];
+
+        // تحميل الإعدادات عند البدء
+        window.onload = () => {
+            const savedKey = localStorage.getItem('custom_api_key');
+            if(savedKey) {
+                document.getElementById('api-key').value = savedKey;
+                document.getElementById('api-url').value = localStorage.getItem('custom_api_url') || "https://api.openai.com/v1";
+                document.getElementById('model-name').value = localStorage.getItem('custom_model_name') || "gpt-3.5-turbo";
+            }
+        };
+
+        function toggleSettings() {
+            const mode = document.getElementById('provider-select').value;
+            const settingsDiv = document.getElementById('custom-settings');
+            if (mode === 'custom') {
+                settingsDiv.classList.remove('hidden');
+            } else {
+                settingsDiv.classList.add('hidden');
+            }
+        }
+
+        function saveSettings() {
+            localStorage.setItem('custom_api_url', document.getElementById('api-url').value);
+            localStorage.setItem('custom_api_key', document.getElementById('api-key').value);
+            localStorage.setItem('custom_model_name', document.getElementById('model-name').value);
+            alert("تم حفظ إعدادات الـ API الخاص بك محلياً.");
+        }
+
+        function appendMessage(role, text) {
+            const container = document.getElementById('chat-container');
+            const div = document.createElement('div');
+            div.className = `p-4 max-w-2xl ${role === 'user' ? 'message-user self-end ml-auto' : 'message-ai self-start'}`;
+            div.innerText = text;
+            container.appendChild(div);
+            
+            // إضافة مسافة فاصلة وتمرير للأسفل
+            const spacer = document.createElement('div');
+            spacer.className = "h-2"; 
+            container.appendChild(spacer);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // 1. إضافة رسالة المستخدم
+            appendMessage('user', message);
+            chatHistory.push({ role: "user", content: message });
+            input.value = '';
+            
+            // 2. إظهار التحميل
+            document.getElementById('loading').classList.remove('hidden');
+
+            // 3. تحديد الإعدادات بناءً على اختيار المستخدم
+            const mode = document.getElementById('provider-select').value;
+            let apiUrl, apiKey, modelName;
+
+            if (mode === 'default') {
+                if(!DEFAULT_CONFIG.apiKey) {
+                    appendMessage('assistant', "⚠️ خطأ: لم يقم صاحب الموقع بوضع مفتاح API للذكاء الجاهز. يرجى استخدام الخيار 'API مخصص' ووضع مفتاحك الخاص.");
+                    document.getElementById('loading').classList.add('hidden');
+                    return;
+                }
+                apiUrl = DEFAULT_CONFIG.url;
+                apiKey = DEFAULT_CONFIG.apiKey;
+                modelName = DEFAULT_CONFIG.model;
+            } else {
+                apiUrl = document.getElementById('api-url').value || "https://api.openai.com/v1";
+                apiKey = document.getElementById('api-key').value;
+                modelName = document.getElementById('model-name').value || "gpt-3.5-turbo";
+
+                if (!apiKey) {
+                    appendMessage('assistant', "الرجاء إدخال مفتاح API في الإعدادات الجانبية.");
+                    document.getElementById('loading').classList.add('hidden');
+                    return;
+                }
+            }
+
+            // التأكد من أن الرابط ينتهي بـ /chat/completions
+            const endpoint = apiUrl.endsWith('/chat/completions') ? apiUrl : `${apiUrl}/chat/completions`;
+
+            try {
+                // 4. الاتصال بالـ API
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: modelName,
+                        messages: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error?.message || "فشل الاتصال بالخادم");
+                }
+
+                const aiResponse = data.choices[0].message.content;
+                
+                // 5. عرض الرد
+                appendMessage('assistant', aiResponse);
+                chatHistory.push({ role: "assistant", content: aiResponse });
+
+            } catch (error) {
+                appendMessage('assistant', `خطأ: ${error.message}`);
+                console.error(error);
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        }
     </script>
-
 </body>
 </html>
